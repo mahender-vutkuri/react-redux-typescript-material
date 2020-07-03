@@ -2,37 +2,108 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.meeting-wrapper {
+  height: 250px;
+  width: 500px;
+  background-color: teal;
+  display: inline-block;
+  margin-top: 100px;
+  position: relative;
+  z-index: 9;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 15px auto;
+  color: #eee;
+  right: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
+  height: 30px;
+  background: teal;
+  padding: 15px;
+  display: block;
+  box-shadow: 0px 1px 6px black;
+  top: 0;
+  width: -webkit-fill-available;
+  position: fixed;
+  margin-bottom: 50px;
+  z-index: 10
+}
+
+.logo {
+  float: left;
+}
+
+.logo .header-logo {
+  height: 50px;
+  object-fit: contain;
+  margin-top: -10px;
+}
+
+.user {
+  float: right;
+  padding: 4px;
+}
+
+.user-tile {
+  background: white;
+  border-radius: 41px;
+  border: 1px solid;
+  color: teal;
+  display: inline;
+  font-weight: bold;
+  height: 50px;
+  padding: 15px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.joined-user {
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  background: white;
+  border-radius: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  top: 20px;
+  padding: 10px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.fa {
+  color: #0707fdbf;
+  font-size: 125px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.my-btn {
+  color: black;
+  background-color: white;
+  font-weight: bold;
+  outline: none;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+
+.other-users {
+  position: absolute;
+  right: 0;
+  display: grid;
+}
+
+.other-user {
+  font-size: 50px;
+  background-color: #eee;
+  border-radius: 100%;
+  width: 50px;
+  margin: 5px;
 }
