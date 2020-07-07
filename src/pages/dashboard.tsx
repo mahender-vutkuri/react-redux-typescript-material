@@ -74,19 +74,19 @@ function Dashboard() {
                 </div>
             </div>
 
-            <p>
+            <div>
                 {isJoined &&
                     <div>
                         <span> Meeting started  </span>
                         <p> <b> In the meeting : </b> {isJoined_f ? 'test user 1' : ''} {isJoined_s ? ', test user 2' : ''} {isJoined_t ? ',test user 3' : ''} </p>
                     </div>
                 }
-            </p>
-            <p>
+            </div>
+            <div>
                 {meetingEndTime &&
                     <span> <b> Meeting duration is : </b> {meetingEndTime} </span>
                 }
-            </p>
+            </div>
         </div>
     )
 }
