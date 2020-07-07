@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,14 +6,17 @@ import {
   Link
 } from "react-router-dom";
 import './App.css';
+import { useHistory, useLocation } from "react-router-dom";
 import LoginPage from './pages/login';
 import Dashboard from './pages/dashboard';
 
 
 
 function App() {
+
   return (
     <div className="App">
+     
       <Router>
 
         <Switch>

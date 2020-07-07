@@ -45,6 +45,9 @@ function Dashboard() {
                 // alert('User 2 is joined')
             }, 10000);
         } else {
+            setJoined_f(false)
+            setJoined_s(false)
+            setJoined_t(false)
             get_time_diff()
         }
     }
@@ -52,16 +55,16 @@ function Dashboard() {
         <div>
             <Header />
             <div className="meeting-wrapper">
-                <div className="joined-user fa fa-user">
+                <div title="logged user" className="joined-user fa fa-user">
                 </div>
                 <div className="other-users">
-                    {isJoined_f && <div className="other-user fa fa-user">
+                    {isJoined_f && <div title="test user 1" className="other-user fa fa-user">
                     </div>}
 
-                    {isJoined_s && <div className="other-user fa fa-user">
+                    {isJoined_s && <div title="test user 2" className="other-user fa fa-user">
                     </div>}
 
-                    {isJoined_t && <div className="other-user fa fa-user">
+                    {isJoined_t && <div title="test user 3" className="other-user fa fa-user">
                     </div>}
                 </div>
                 <div className="controls">
