@@ -1,12 +1,11 @@
 import React from 'react';
 import Header from './header';
-
+import Checkout from './checkout/checkout'
 function ContactPage() {
 
     return (
         <div >
             <Header />
-
             <div className="col-lg-8 offset-lg-2 m-t-50">
                 <form name="form" className="m-t-50 login-form" >
                     <div className="form-group">

@@ -41,10 +41,13 @@
   float: left;
 }
 
-.logo .header-logo {
+.header-logo {
   height: 50px;
+  width: 200px;
   object-fit: contain;
-  margin-top: -10px;
+  position: absolute;
+  top: 6px;
+  left: 50px;
 }
 
 .user {
@@ -52,6 +55,9 @@
   padding: 4px;
   display: flex;
   align-items: center;
+  position: absolute;
+  right: 0;
+  top: 15px;
 }
 
 .user-tile {
@@ -162,7 +168,8 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 10;
-  top: 60px;
+  top: 49px;
+  right: 10px;
 }
 
 .dropdown-content a {
@@ -175,7 +182,8 @@
 }
 
 .dropdown-content a:hover {
-  background-color: #ddd;
+  background-color: #008080;
+  color: white;
 }
 
 .show {
