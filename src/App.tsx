@@ -18,6 +18,7 @@ import RegistrationPage from './pages/registration'
 import SideBar from './sidebar';
 import Checkout from './pages/checkout/checkout';
 import Album from './pages/album/album';
+import GitReposPage from './pages/gitrepo/gitrepo'
 function App() {
 
   return (
@@ -50,6 +51,10 @@ function App() {
           <Route path="/Album">
             <Album />
           </Route>
+          <Route path="/Git">
+            <GitReposPage />
+          </Route>
+          
           <Redirect from="*" to={"/login"} />
         </Switch>
       </Router>

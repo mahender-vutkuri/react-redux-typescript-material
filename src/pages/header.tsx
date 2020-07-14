@@ -11,16 +11,17 @@ function Header() {
         setDrpdown(!showDropdown)
         // document.getElementById("myDropdown").classList.toggle("show");
     }
+    localStorage.setItem("meeting",JSON.stringify(false))
     useEffect(() => {
         if (window.location.pathname !== "/login") {
-            // userAutoLogout()
+            userAutoLogout()
         }
     }, []);
 
     function userAutoLogout() {
         console.log('initiated');
 
-        var IDLE_TIMEOUT = 30; //seconds
+        var IDLE_TIMEOUT = 5; //seconds
         var _idleSecondsCounter = 0;
         document.onclick = function () {
             _idleSecondsCounter = 0;
@@ -37,10 +38,11 @@ function Header() {
             let meet = localStorage.getItem("meeting")
             console.log(meet);
             if (meet) return;
-
+            
             _idleSecondsCounter++;
             var oPanel = document.getElementById("SecondsUntilExpire");
             if (_idleSecondsCounter >= 5) {
+                console.log('show now');
 
                 if (oPanel) {
                     oPanel.style.display = "block"
@@ -50,11 +52,9 @@ function Header() {
                 if (oPanel) oPanel.style.display = "none"
             }
             if (_idleSecondsCounter >= IDLE_TIMEOUT) {
-                // alert("Session expired!");
-                history.push("/login");
                 clearInterval(int);
                 _idleSecondsCounter = 0;
-                // document.location.href = "login";
+                history.push("/login");
             }
         }
     }
