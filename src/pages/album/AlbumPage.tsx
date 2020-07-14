@@ -1,5 +1,4 @@
 import React from 'react';
-// import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
@@ -13,7 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-import Header from './../header'
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -66,8 +64,7 @@ export default function Album() {
 
     return (
         <React.Fragment>
-            <Header />
-            <main>
+            <main className="auto-height">
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h4" variant="h4" align="center" color="textPrimary" gutterBottom>

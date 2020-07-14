@@ -10,10 +10,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from './address';
-import PaymentForm from './payment';
-import Review from './review';
-import Header from './../header';
+import AddressForm from './AddressPage';
+import PaymentForm from './PaymentPage';
+import Review from './ReviewPage';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -66,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
+function getStepContent(step: number) {
   switch (step) {
     case 0:
       return <AddressForm />;
@@ -92,12 +91,13 @@ export default function Checkout() {
   };
 
   return (
-    <React.Fragment>
-      <Header />
-      <div className="checkout-header">
-        This component is build using <code>Checkbox</code>,<code>Button</code>,<code>Input</code>,<code>Stepper</code> components.
+    <React.Fragment >
+
+
+      <main className={classes.layout+" auto-height"}>
+        <div className="checkout-header">
+          This component is build using <code>Checkbox</code>,<code>Button</code>,<code>Input</code>,<code>Stepper</code> components.
        </div>
-      <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
             Sample Cart Checkout Page

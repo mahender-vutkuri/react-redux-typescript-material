@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from "react-router-dom";
 // import ContactPage from './contactus';
-import SideBar from './../sidebar';
+import SideBar from './SidebarPage';
 
 
 function Header() {
@@ -9,12 +9,11 @@ function Header() {
     const history = useHistory()
     function myFunction() {
         setDrpdown(!showDropdown)
-        // document.getElementById("myDropdown").classList.toggle("show");
     }
     // localStorage.setItem("meeting",JSON.stringify(false))
     useEffect(() => {
         if (window.location.pathname !== "/login") {
-            userAutoLogout()
+            // userAutoLogout()
         }
     }, []);
 
@@ -35,8 +34,8 @@ function Header() {
         var int = window.setInterval(CheckIdleTime, 1000);
 
         function CheckIdleTime() {
-            let meet = JSON.parse(localStorage.getItem("meeting"))
-            // console.log(meet);
+            let localData:any = localStorage.getItem("meeting")
+            let meet:any = JSON.parse(localData)
             if (meet) return;
             
             _idleSecondsCounter++;

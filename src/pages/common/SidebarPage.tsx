@@ -1,90 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { useHistory, useLocation } from "react-router-dom";
-// // import ContactPage from './contactus';
-// // import HomePage from './home';
-
-
-// function Header() {
-//     const [showDropdown, setDrpdown] = useState(false)
-//     const history = useHistory()
-//     function myFunction() {
-//         setDrpdown(!showDropdown)
-//         // document.getElementById("myDropdown").classList.toggle("show");
-//     }
-//     useEffect(() => {
-//         if (window.location.pathname !== "/login") {
-//             // userAutoLogout()
-//         }
-//     }, []);
-
-//     function userAutoLogout() {
-//         console.log('initiated');
-
-//         var IDLE_TIMEOUT = 30; //seconds
-//         var _idleSecondsCounter = 0;
-//         document.onclick = function () {
-//             _idleSecondsCounter = 0;
-//         };
-//         document.onmousemove = function () {
-//             _idleSecondsCounter = 0;
-//         };
-//         document.onkeypress = function () {
-//             _idleSecondsCounter = 0;
-//         };
-//         var int = window.setInterval(CheckIdleTime, 1000);
-
-//         function CheckIdleTime() {
-//             let meet = localStorage.getItem("meeting")
-//             console.log(meet);
-//             if(meet) return;
-
-//             _idleSecondsCounter++;
-//             var oPanel = document.getElementById("SecondsUntilExpire");
-//             if (_idleSecondsCounter >= 5) {
-
-//                 if (oPanel) {
-//                     oPanel.style.display = "block"
-//                     oPanel.innerHTML = "Your Session will be closed in: " + (IDLE_TIMEOUT - _idleSecondsCounter) + " Seconds";
-//                 }
-//             } else {
-//                 if (oPanel) oPanel.style.display = "none"
-//             }
-//             if (_idleSecondsCounter >= IDLE_TIMEOUT) {
-//                 // alert("Session expired!");
-//                 history.push("/login");
-//                 clearInterval(int);
-//                 _idleSecondsCounter = 0;
-//                 // document.location.href = "login";
-//             }
-//         }
-//     }
-//     return (
-//         <div className="sidebar">
-//             <div className="user">
-//                 <ul className="app-navs">
-//                     <li >
-//                         <a href="/home">Home</a>
-//                     </li>
-//                     <li >
-//                         <a href="/dashboard">Dashboard</a>
-//                     </li>
-//                     <li >
-//                         <a href="/contactus">Contact Us</a>
-//                     </li>
-//                     <li >
-//                         <a href="/registration">Register</a>
-//                     </li>
-//                 </ul>
-//             </div>
-
-//         </div>
-//     );
-// }
-
-// export default Header
-
-
-
 import React from 'react';
 import clsx from 'clsx';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
@@ -221,11 +134,11 @@ export default function SideBar() {
                 <a href="/dashboard">Dashboard</a>
               </li>
               <li >
-                <a href="/contactus">Contact Us</a>
+                <a href="/todo">To Do </a>
               </li>
-              <li >
+              {/* <li >
                 <a href="/registration">Register</a>
-              </li>
+              </li> */}
             </ul>
             <div title="user name" onClick={myFunction} className="user-tile" > Valli Shaik </div>
             {showDropdown && <div className="dropdown-content" id="myDropdown">
@@ -255,7 +168,7 @@ export default function SideBar() {
         </div>
         <Divider />
         <List>
-          {['Checkout', 'Album', 'Git', 'Drafts'].map((text, index) => (
+          {['checkout', 'albums', 'git', 'drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
               <Link color="inherit" href={text}>

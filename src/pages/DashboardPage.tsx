@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from './header';
 function Dashboard() {
 
     const [isJoined, setJoined] = useState(false);
@@ -101,8 +100,7 @@ function Dashboard() {
         }
     }
     return (
-        <div>
-            <Header />
+        <div className="dis-flx auto-height">
             <audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoPlay={false} ></audio>
             <div className="meeting-wrapper">
                 <div title="logged user" className="joined-user">
@@ -138,7 +136,7 @@ function Dashboard() {
                     </div>
                 }
             </div>
-            <div>
+            <div style={{marginTop: "25px"}}>
                 {meetingEndTime &&
                     <span> <b> Meeting duration is : </b> {meetingEndTime} </span>
                 }
@@ -147,4 +145,4 @@ function Dashboard() {
     )
 }
 
-export default Dashboard;
+export {Dashboard};

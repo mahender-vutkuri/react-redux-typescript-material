@@ -1,44 +1,93 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Create React App example with Material-UI, TypeScript, Redux and Routing
 
-## Available Scripts
+This is a new version with React Hooks, Material-UI 4 and React-Redux 7 (with hooks!). We use this template for all our new projects. If you want to bootstrap a project with the classic approach without hooks but with class components, you are welcome to use the [previous version](https://github.com/innFactory/create-react-app-material-typescript-redux/tree/v1).
 
-In the project directory, you can run:
+<img width="100%" src="screenshot.png" alt="example"/>
 
-### `yarn start`
+Inspired by:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+-   [Material-UI](https://github.com/mui-org/material-ui)
+-   [react-redux-typescript-boilerplate](https://github.com/rokoroku/react-redux-typescript-boilerplate)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Contains
 
-### `yarn test`
+-   [x] [Material-UI](https://github.com/mui-org/material-ui)
+-   [x] [Typescript](https://www.typescriptlang.org/)
+-   [x] [React](https://facebook.github.io/react/)
+-   [x] [Redux](https://github.com/reactjs/redux)
+-   [x] [Redux-Thunk](https://github.com/gaearon/redux-thunk)
+-   [x] [Redux-Persist](https://github.com/rt2zz/redux-persist)
+-   [x] [React Router](https://github.com/ReactTraining/react-router)
+-   [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
+-   [x] [TodoMVC example](http://todomvc.com)
+-   [x] PWA Support
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Roadmap
 
-### `yarn build`
+-   [x] Make function based components and use hooks for state etc.
+-   [x] Implement [Material-UIs new styling solution](https://material-ui.com/css-in-js/basics/) based on hooks
+-   [x] use react-redux hooks
+-   [ ] Hot Reloading -> Waiting for official support of react-scripts
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to use
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Download or clone this repo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/innFactory/create-react-app-material-typescript-redux
+cd create-react-app-material-typescript-redux
+```
 
-### `yarn eject`
+Install it and run:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+npm i
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Enable PWA ServiceWorker [OPTIONAL]
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Just comment in the following line in the `index.tsx`:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```javascript
+// registerServiceWorker();
+```
 
-## Learn More
+to
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```javascript
+registerServiceWorker();
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Enable Prettier [OPTIONAL]
+
+1.  Step: Install the Prettier plugin (e.g. the one of Esben Petersen)
+2.  Add the following snippet to your settings in VSCode:
+
+```json
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+       "source.organizeImports": true // optional
+   },
+```
+
+## Enable project snippets [OPTIONAL]
+
+Just install following extension:
+
+<img width="70%" src="vscode_snippet0.png" alt="Project Snippet"/>
+
+After that you can start to type `fcomp` (_for function component_) and you get a template for a new component.
+
+<img width="70%" src="vscode_snippet1.png" alt="Project Snippet"/>
+<img width="70%" src="vscode_snippet2.png" alt="Project Snippet"/>
+
+## The idea behind the example
+
+This example demonstrate how you can use [Create React App](https://github.com/facebookincubator/create-react-app) with [TypeScript](https://github.com/Microsoft/TypeScript).
+
+## Contributors
+
+-   [Anton Spöck](https://github.com/spoeck)
+
+Powered by [innFactory](https://innfactory.de/)
