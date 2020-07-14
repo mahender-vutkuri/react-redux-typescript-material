@@ -31,7 +31,7 @@ function Routes() {
 			<Route exact={true} path="/dashboard" component={Dashboard} />
 			<Route exact={true} path="/login" component={LoginPage} />
 			<Route exact={true} path="/git" component={GitReposPage} />
-			<Redirect from="*" to={"/login"} />
+			{/* <Redirect from="*" to={"/login"} /> */}
 		</div>
 	);
 }
