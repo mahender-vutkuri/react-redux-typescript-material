@@ -25,7 +25,7 @@ function Routes() {
 		<div className={classes.content}>
 			<Route exact={true} path="/" component={LoginPage} />
 			<Route exact={true} path="/home" component={HomePage} />
-			<Route exact={true} path="/todo" component={TodoPage} />
+			<Route exact={true} path="/tasks" component={TodoPage} />
 			{/* <Route exact={true} path="/checkout" component={Checkout} /> */}
 			<Route exact={true} path="/users" component={Album} />
 			<Route exact={true} path="/dashboard" component={Dashboard} />

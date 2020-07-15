@@ -21,6 +21,7 @@ export function TodoDialog(props: Props) {
 			id: Math.random(),
 			completed: false,
 			text: newTodoText,
+			created: new Date()
 		});
 		onClose();
 
@@ -34,7 +35,7 @@ export function TodoDialog(props: Props) {
 
 	return (
 		<Dialog open={open} onClose={handleClose}>
-			<DialogTitle>Add a new TODO</DialogTitle>
+			<DialogTitle>Add a new Task</DialogTitle>
 			<TextField
 				id="multiline-flexible"
 				multiline
@@ -44,7 +45,7 @@ export function TodoDialog(props: Props) {
 			/>
 			<DialogActions>
 				<Button color="primary" onClick={handleClose}>
-					OK
+					ADD
 				</Button>
 			</DialogActions>
 		</Dialog>

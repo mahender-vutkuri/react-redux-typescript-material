@@ -29,6 +29,7 @@ export function TodoTable() {
 					<TableRow>
 						<TableCell padding="default">Completed</TableCell>
 						<TableCell padding="default">Text</TableCell>
+						<TableCell padding="default">Created Date</TableCell>
 						<TableCell padding="default">Delete</TableCell>
 					</TableRow>
 				</TableHead>
@@ -44,6 +45,7 @@ export function TodoTable() {
 									<Checkbox checked={n.completed} />
 								</TableCell>
 								<TableCell padding="none">{n.text}</TableCell>
+								<TableCell padding="none">{n.created.toString()}</TableCell>
 								<TableCell padding="none">
 									<IconButton
 										aria-label="Delete"

@@ -68,7 +68,7 @@ export default function Album() {
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h4" variant="h4" align="center" color="textPrimary" gutterBottom>
-                            Sample users layout with some random profile images from <a href="https://source.unsplash.com/" target="_blank" >here</a>
+                            Sample geristered users with some random profile images from <a href="https://source.unsplash.com/" target="_blank" >here</a>
                         </Typography>
                     </Container>
                 </div>

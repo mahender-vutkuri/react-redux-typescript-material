@@ -21,7 +21,7 @@ export function TodoPage() {
 			<TodoDialog open={open} onClose={handleClose} />
 			<Grid item xs={6}>
 				<Typography variant="h4" gutterBottom>
-					Todo List
+					Task List
 				</Typography>
 			</Grid>
 			<Grid item xs={6}>
@@ -32,7 +32,7 @@ export function TodoPage() {
 						color="secondary"
 						onClick={handleAddTodo}
 					>
-						Add Todo
+						Add Task
 					</Button>
 				</div>
 			</Grid>

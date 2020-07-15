@@ -312,13 +312,25 @@
     margin: 10px auto;
     margin-left: 65px;
 }
-.signup{
 
-}
+.signup {}
+
 .MuiCheckbox-root {
     color: teal !important;
 }
+
 .MuiButton-containedPrimary {
     color: #fff;
     background-color: teal !important;
+}
+
+.login {
+    height: 100%;
+    overflow: auto;
+    width: 100%;
+    margin: 0;
+
+    .MuiTypography-colorPrimary {
+        color: white;
+    }
 }

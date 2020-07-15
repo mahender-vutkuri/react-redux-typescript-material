@@ -13,14 +13,14 @@ function Header() {
     // localStorage.setItem("meeting",JSON.stringify(false))
     useEffect(() => {
         if (window.location.pathname !== "/login") {
-            // userAutoLogout()
+            userAutoLogout()
         }
     }, []);
 
     function userAutoLogout() {
         // console.log('initiated');
 
-        var IDLE_TIMEOUT = 10; //seconds
+        var IDLE_TIMEOUT = 30; //seconds
         var _idleSecondsCounter = 0;
         document.onclick = function () {
             _idleSecondsCounter = 0;

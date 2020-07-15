@@ -134,7 +134,7 @@ export default function SideBar() {
                 <a href="/dashboard">Dashboard</a>
               </li>
               <li >
-                <a href="/todo">To Do </a>
+                <a href="/tasks">Task </a>
               </li>
               {/* <li >
                 <a href="/registration">Register</a>
