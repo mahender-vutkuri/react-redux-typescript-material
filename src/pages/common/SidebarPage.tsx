@@ -168,7 +168,7 @@ export default function SideBar() {
         </div>
         <Divider />
         <List>
-          {['checkout', 'albums', 'git', 'drafts'].map((text, index) => (
+          {['signup', 'users', 'git', 'drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
               <Link color="inherit" href={text}>

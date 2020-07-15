@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { Route, Router } from "react-router-dom";
 import { history } from "./configureStore";
 import { Todo } from "./model";
-import { HomePage, TodoPage,Dashboard,LoginPage,GitReposPage } from "./pages";
+import { HomePage, TodoPage,Dashboard,LoginPage,GitReposPage,SignUp } from "./pages";
 import { RootState } from "./reducers/index";
 import { withRoot } from "./withRoot";
 import Header from './pages/common/HeaderPage';
@@ -26,11 +26,12 @@ function Routes() {
 			<Route exact={true} path="/" component={LoginPage} />
 			<Route exact={true} path="/home" component={HomePage} />
 			<Route exact={true} path="/todo" component={TodoPage} />
-			<Route exact={true} path="/checkout" component={Checkout} />
-			<Route exact={true} path="/albums" component={Album} />
+			{/* <Route exact={true} path="/checkout" component={Checkout} /> */}
+			<Route exact={true} path="/users" component={Album} />
 			<Route exact={true} path="/dashboard" component={Dashboard} />
 			<Route exact={true} path="/login" component={LoginPage} />
 			<Route exact={true} path="/git" component={GitReposPage} />
+			<Route exact={true} path="/signup" component={SignUp} />
 			{/* <Redirect from="*" to={"/login"} /> */}
 		</div>
 	);

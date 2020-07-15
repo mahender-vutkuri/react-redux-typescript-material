@@ -2,20 +2,22 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 function GitReposPage() {
     const [repos, setRepos] = useState<any[]>([])
-
+    const [name, setName] = useState("facebook")
     useEffect(() => {
         fetchRepoData();
     }, []);
 
     const fetchRepoData = async () => {
-        const response = await axios.get('https://api.github.com/users/facebook/repos');
+        const response = await axios.get('https://api.github.com/users/'+name+'/repos');
         setRepos(response.data);
     }
     return (
         <div className="auto-height" style={{ marginLeft: "100px" }}>
+        <input type="text" value={name} onChange={e => setName(e.target.value)} />
+        <button onClick={fetchRepoData}>get repos</button> <small>(try angular, vue, jquery etc.)</small>
             <h2>
-                This is the real time data of facebook projects in GIT
-        </h2>
+                This is the real time data of {name} projects in GIT
+            </h2>
             {repos.length > 0 ?
                 <table className="repos-table">
                     <thead>

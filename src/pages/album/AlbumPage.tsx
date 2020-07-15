@@ -68,7 +68,7 @@ export default function Album() {
                 <div className={classes.heroContent}>
                     <Container maxWidth="sm">
                         <Typography component="h4" variant="h4" align="center" color="textPrimary" gutterBottom>
-                            Album layout with some random images from <a href="https://source.unsplash.com/" target="_blank" >here</a>
+                            Sample users layout with some random profile images from <a href="https://source.unsplash.com/" target="_blank" >here</a>
                         </Typography>
                     </Container>
                 </div>
@@ -84,19 +84,19 @@ export default function Album() {
                                     />
                                     <CardContent className={classes.cardContent}>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            Heading
+                                            User Name
                                         </Typography>
                                         <Typography>
-                                            This is a sample header description.
+                                            user.test@xyz.com
                                         </Typography>
                                     </CardContent>
                                     <CardActions>
                                         <Button size="small" color="primary">
-                                            View
+                                            View User
                                         </Button>
-                                        <Button size="small" color="primary">
+                                        {/* <Button size="small" color="primary">
                                             Edit
-                                        </Button>
+                                        </Button> */}
                                     </CardActions>
                                 </Card>
                             </Grid>
