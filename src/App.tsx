@@ -72,7 +72,10 @@ function App() {
 	const isMobile = useMediaQuery((theme: Theme) =>
 		theme.breakpoints.down("sm")
 	);
-
+	let isLoggedin:any = localStorage.getItem("isLoggedin")
+	isLoggedin = JSON.parse(isLoggedin)
+	// console.log(isLoggedin)
+	// console.log(history)
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
 	};
@@ -81,7 +84,7 @@ function App() {
 		<Router history={history}>
 			<div className={classes.root}>
 				<div className={classes.appFrame}>
-					<Header />
+				{history.location.pathname !=="/login" ? <Header /> : '' }	
 					<Routes />
 				</div>
 			</div>

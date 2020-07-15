@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import cuid from 'cuid';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -46,9 +46,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export  function SignUp() {
+export function SignUp() {
   const classes = useStyles();
+  const [fname, setFname] = useState("")
+  const [lname, setLname] = useState("")
+  const [email, setEmail] = useState("")
+  const [pwd, setPwd] = useState("")
 
+  const signUpUser = () => {
+    if (fname.trim().length > 0 && lname.trim().length > 0 && email.trim().length > 0 && pwd.trim().length > 0) {
+      let users: any = localStorage.getItem('users')
+      users = JSON.parse(users)
+      if (users && users.length == 0 || users == null) users = []
+      let id = cuid();
+      let registeredUser = {
+        id, fname, lname, email, pwd
+      }
+      console.log(registeredUser);
+      users.push(registeredUser)
+      localStorage.setItem("users", JSON.stringify(users))
+      alert('user created succesfully')
+      setFname("")
+      setLname("")
+      setEmail("")
+      setPwd("")
+    } else {
+      alert('please fill all fields')
+    }
+  }
   return (
     <Container component="main" maxWidth="xs" className="signup auto-height">
       <CssBaseline />
@@ -57,7 +82,7 @@ export  function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Add User
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
@@ -71,6 +96,8 @@ export  function SignUp() {
                 id="firstName"
                 label="First Name"
                 autoFocus
+                value={fname}
+                onChange={e => setFname(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -82,6 +109,8 @@ export  function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                value={lname}
+                onChange={e => setLname(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -93,6 +122,8 @@ export  function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,6 +136,8 @@ export  function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={pwd}
+                onChange={e => setPwd(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -119,21 +152,12 @@ export  function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={signUpUser}
           >
-            Sign Up
+            Add User
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
     </Container>
   );
 }

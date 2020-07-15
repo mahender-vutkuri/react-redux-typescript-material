@@ -143,7 +143,10 @@ export default function SideBar() {
             <div title="user name" onClick={myFunction} className="user-tile" > Valli Shaik </div>
             {showDropdown && <div className="dropdown-content" id="myDropdown">
               <a href="#">Settings</a>
-              <a href="/login">Logout</a>
+              <a href="/login" onClick={e=>{
+                localStorage.setItem('isLoggedin',"false")
+                localStorage.removeItem('loggedinUser')
+              }}>Logout</a>
             </div>}
           </div>
         </Toolbar>
