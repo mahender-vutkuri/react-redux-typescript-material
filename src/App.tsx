@@ -75,7 +75,7 @@ function App() {
 	let isLoggedin:any = localStorage.getItem("isLoggedin")
 	isLoggedin = JSON.parse(isLoggedin)
 	// console.log(isLoggedin)
-	// console.log(history)
+	console.log(history)
 	const handleDrawerToggle = () => {
 		setMobileOpen(!mobileOpen);
 	};
@@ -84,7 +84,8 @@ function App() {
 		<Router history={history}>
 			<div className={classes.root}>
 				<div className={classes.appFrame}>
-				{history.location.pathname !=="/login" ? <Header /> : '' }	
+				{/* {window.location.pathname !=="/login" ? <Header /> : '' }	 */}
+				<Header /> 
 					<Routes />
 				</div>
 			</div>

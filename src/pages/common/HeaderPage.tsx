@@ -52,10 +52,11 @@ function Header() {
             } else {
                 if (oPanel) oPanel.style.display = "none"
             }
-            if (_idleSecondsCounter >= IDLE_TIMEOUT) {
+            if (_idleSecondsCounter == IDLE_TIMEOUT) {
                 clearInterval(int);
                 _idleSecondsCounter = 0;
                 history.push("/login");
+                document.getElementById("SecondsUntilExpire").style.display = "none"
             }
         }
     }

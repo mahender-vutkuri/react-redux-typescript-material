@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,6 +51,7 @@ export function LoginPage() {
     const classes = useStyles();
     const [email, setEmail] = useState('')
     const [pwd, setPwd] = useState('')
+    
     const handleLogin = () => {
 
         let users: any = localStorage.getItem('users')
@@ -88,6 +89,10 @@ export function LoginPage() {
         //     alert('invalid credentials')
         // }
     }
+    useEffect(()=>{
+        let el:any = document.getElementsByClassName('header')[0]
+        el.style.display='none'
+    })
     return (
         <Grid container component="main" className={classes.root + " login "}>
             <CssBaseline />
