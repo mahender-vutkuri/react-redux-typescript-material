@@ -1,6 +1,22 @@
 {
-	"name": "create-react-app-typescript-redux",
-	"version": "2.0.0",
+	"name": "example-cra-redux-typescript-material-ui",
+	"description": "An application to demonstrate online meeting platform by using react,redux,react-router and material UI",
+	"version": "1.0.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mahender-vutkuri/react-redux-typescript-material.git"
+	},
+	"keywords": [
+		"cra",
+		"react",
+		"redux",
+		"routing",
+		"react-router",
+		"material UI",
+		"online meeting platform"
+	],
+	"author": "Mahender Reddy Vutkuri",
+	"private": true,
 	"dependencies": {
 		"@material-ui/core": "4.9.0",
 		"@material-ui/icons": "4.5.1",
@@ -42,5 +58,6 @@
 		"@types/redux-logger": "3.0.7",
 		"@types/webpack-env": "1.15.1",
 		"@types/react-redux": "7.1.7"
-	}
+	},
+
 }
