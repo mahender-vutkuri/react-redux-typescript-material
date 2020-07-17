@@ -13,7 +13,7 @@ function Header() {
     // localStorage.setItem("meeting",JSON.stringify(false))
     useEffect(() => {
         if (window.location.pathname !== "/login") {
-            userAutoLogout()
+            // userAutoLogout()
         }
     }, []);
 
