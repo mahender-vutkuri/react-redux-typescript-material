@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -89,6 +89,16 @@ export default function SideBar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [showDropdown, setDrpdown] = React.useState(false)
+  const [loggedinUser, setLoggedinUser] = useState('')
+
+  useEffect(() => {
+    let usr: any = localStorage.getItem('loggedinUser')
+    usr = JSON.parse(usr)
+    console.log(usr);
+
+    usr = usr.fname.substring(0, 1) + ' ' + usr.lname.substring(0, 1)
+    setLoggedinUser(usr)
+  })
   function myFunction() {
     setDrpdown(!showDropdown)
   }
@@ -131,20 +141,20 @@ export default function SideBar() {
                 <a href="/home">Home</a>
               </li>
               <li >
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Meetings</a>
               </li>
               <li >
-                <a href="/tasks">Task </a>
+                <a href="/tasks">Tasks </a>
               </li>
               {/* <li >
                 <a href="/registration">Register</a>
               </li> */}
             </ul>
-            <div title="user name" onClick={myFunction} className="user-tile" > Valli Shaik </div>
+            <div title="user name" onClick={myFunction} className="user-tile" > {loggedinUser} </div>
             {showDropdown && <div className="dropdown-content" id="myDropdown">
               <a href="#">Settings</a>
-              <a href="/login" onClick={e=>{
-                localStorage.setItem('isLoggedin',"false")
+              <a href="/login" onClick={e => {
+                localStorage.setItem('isLoggedin', "false")
                 localStorage.removeItem('loggedinUser')
               }}>Logout</a>
             </div>}
@@ -174,10 +184,10 @@ export default function SideBar() {
           {['signup', 'users', 'git', 'drafts'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>
-              <Link color="inherit" href={text}>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </Link>
-             
+                <Link color="inherit" href={text}>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </Link>
+
               </ListItemIcon>
               <Link color="inherit" href={text}>
                 <ListItemText primary={text} />

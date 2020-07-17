@@ -6,6 +6,7 @@ import SideBar from './SidebarPage';
 
 function Header() {
     const [showDropdown, setDrpdown] = useState(false)
+    
     const history = useHistory()
     function myFunction() {
         setDrpdown(!showDropdown)
@@ -13,8 +14,10 @@ function Header() {
     // localStorage.setItem("meeting",JSON.stringify(false))
     useEffect(() => {
         if (window.location.pathname !== "/login") {
-            // userAutoLogout()
+            userAutoLogout()
         }
+
+        
     }, []);
 
     function userAutoLogout() {

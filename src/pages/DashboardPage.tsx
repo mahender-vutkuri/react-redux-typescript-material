@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
 function Dashboard() {
 
 
     // const []
     const [isJoined, setJoined] = useState(false);
-
+    const [loggedinUser,setLoggedinUser] = useState('')
+    const [curTime,setCurTime] = useState(new Date().toString());
+    useEffect(()=>{
+        let usr:any = localStorage.getItem('loggedinUser')
+        usr = JSON.parse(usr)
+        console.log(usr);
+        
+        usr = usr.fname.substring(0,1) + ' ' + usr.lname.substring(0,1)
+        setLoggedinUser(usr)
+    },[])
     // ****************************************************************************
     const [isJoined_f, setJoined_f] = useState(false);
     const [isJoined_s, setJoined_s] = useState(false);
@@ -109,6 +118,9 @@ function Dashboard() {
             get_time_diff()
         }
     }
+    window.setInterval(()=>{
+        setCurTime(new Date().toString().substring(0,25))
+    }, 1000)
     return (
         <div className="auto-height">
             <div className="new-meeting">
@@ -119,12 +131,12 @@ function Dashboard() {
                         title="Image title">
                         <div className="user-avatar">
                             <span className="user-avatar-inner">
-                                M V
+                                {loggedinUser}
                             </span>
                         </div>
                     </CardMedia>
                     <div className="user-meeting-id">
-                        Hi <span>  User Name </span>, Your meeting ID is
+                        Hi <span>  {JSON.parse(localStorage.getItem('loggedinUser')).fname} </span>, Your meeting ID is
                         <p>
                             <input type="text" readOnly disabled value="674 894 2345" />
                         </p>
@@ -153,7 +165,10 @@ function Dashboard() {
                     </div>
                     <div className="new-meet meeting-info">
                         {/* camera & controls */}
-                        Show date & time along with day info
+                        {/* Show date & time along with day info <br/> */}
+                            <p>
+                            {curTime}
+                          </p> 
                         You have no upcoming meeting today.
                     </div>
                 </div>
