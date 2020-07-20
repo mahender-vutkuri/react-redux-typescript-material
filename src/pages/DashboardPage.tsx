@@ -1,20 +1,28 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
+import MicIcon from '@material-ui/icons/Mic';
+import MicOffIcon from '@material-ui/icons/MicOff';
+import VideocamIcon from '@material-ui/icons/Videocam';
+import VideocamOffIcon from '@material-ui/icons/VideocamOff';
+import GroupIcon from '@material-ui/icons/Group';
+import CallEndIcon from '@material-ui/icons/CallEnd';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 function Dashboard() {
 
-
-    // const []
     const [isJoined, setJoined] = useState(false);
-    const [loggedinUser,setLoggedinUser] = useState('')
-    const [curTime,setCurTime] = useState(new Date().toString());
-    useEffect(()=>{
-        let usr:any = localStorage.getItem('loggedinUser')
+    const [cameraStatus, setCameraStatus] = useState(false);
+    const [micStatus, setMicStatus] = useState(false);
+    const [showParticipants, setShowParticipants] = useState(false);
+    const [loggedinUser, setLoggedinUser] = useState('')
+    const [curTime, setCurTime] = useState(new Date().toString());
+    useEffect(() => {
+        let usr: any = localStorage.getItem('loggedinUser')
         usr = JSON.parse(usr)
-        console.log(usr);
-        
-        usr = usr.fname.substring(0,1) + ' ' + usr.lname.substring(0,1)
+        // console.log(usr);
+
+        usr = usr.fname.substring(0, 1) + ' ' + usr.lname.substring(0, 1)
         setLoggedinUser(usr)
-    },[])
+    }, [])
     // ****************************************************************************
     const [isJoined_f, setJoined_f] = useState(false);
     const [isJoined_s, setJoined_s] = useState(false);
@@ -22,29 +30,29 @@ function Dashboard() {
     const [meetingTime, setMeetingTime] = useState()
     const [meetingEndTime, setMeetingEndTime] = useState();
 
-    const cameraAccess = () => {
-        let localstream;
-        let vid: any = document.getElementById('vid')
-        console.log(vid);
-        
-        if (navigator.mediaDevices.getUserMedia !== null) {
-            var options = {
-                video: true,
-                audio: true
-            };
-            navigator.getUserMedia(options, function (stream) {
-                vid.srcObject = stream;
-                localstream = stream;
-                vid.play();
-                localStorage.setItem('meeting', "true")
-                console.log(stream, "streaming");
-            }, function (e) {
-                console.log("background error : " + e.name);
-            });
-        }
+    // const cameraAccess = () => {
+    //     let localstream;
+    //     let vid: any = document.getElementById('vid')
+    //     console.log(vid);
+
+    //     if (navigator.mediaDevices.getUserMedia !== null) {
+    //         var options = {
+    //             video: true,
+    //             audio: true
+    //         };
+    //         navigator.getUserMedia(options, function (stream) {
+    //             vid.srcObject = stream;
+    //             localstream = stream;
+    //             vid.play();
+    //             localStorage.setItem('meeting', "true")
+    //             console.log(stream, "streaming");
+    //         }, function (e) {
+    //             console.log("background error : " + e.name);
+    //         });
+    //     }
 
 
-    }
+    // }
 
     const capOff = () => {
         let localstream;
@@ -54,7 +62,7 @@ function Dashboard() {
         if (navigator.mediaDevices.getUserMedia !== null) {
             var options = {
                 video: true,
-                audio: true
+                audio: false
             };
             navigator.getUserMedia(options, function (stream) {
                 vid.srcObject = stream;
@@ -67,9 +75,6 @@ function Dashboard() {
         }
         vid.pause();
         vid.src = "";
-        console.log("all capture devices off");
-        var sound: any = document.getElementById("audio");
-        sound.play()
     }
 
     const get_time_diff = () => {
@@ -91,9 +96,12 @@ function Dashboard() {
     const handleJoin = (status: boolean) => {
         setJoined(status)
         if (status) {
+            localStorage.setItem('meeting', 'true')
             setTimeout(() => {
-                
-                cameraAccess()
+
+                handleCameraStatus()
+                handleMicStatus()
+                // cameraAccess()
             }, 1000);
             setMeetingTime(new Date())
             setMeetingEndTime(false)
@@ -112,15 +120,47 @@ function Dashboard() {
             }, 10000);
         } else {
             capOff()
+            handleCameraStatus()
+            handleMicStatus()
             setJoined_f(false)
             setJoined_s(false)
             setJoined_t(false)
             get_time_diff()
         }
     }
-    window.setInterval(()=>{
-        setCurTime(new Date().toString().substring(0,25))
+    window.setInterval(() => {
+        setCurTime(new Date().toString().substring(0, 25))
     }, 1000)
+
+    const handleShowParticipants = () => {
+        setShowParticipants(!showParticipants)
+    }
+    const handleCameraStatus = () => {
+        let localstream;
+        let vid: any = document.getElementById('vid')
+        console.log(cameraStatus)
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                vid.srcObject = stream
+                vid.srcObject.getTracks()[0].enabled = !cameraStatus;
+            })
+            .catch(e => console.log(e));
+        setCameraStatus(!cameraStatus)
+    }
+    const handleMicStatus = () => {
+        let localstream;
+        let audio: any = document.getElementById('audio')
+        // localStorage.removeItem('meeting')
+        console.log(cameraStatus)
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                audio.srcObject = stream
+                audio.srcObject.getTracks()[0].enabled = !micStatus;
+            })
+            .catch(e => console.log(e));
+        // if (micStatus) {}
+        setMicStatus(!micStatus)
+    }
     return (
         <div className="auto-height">
             <div className="new-meeting">
@@ -166,10 +206,10 @@ function Dashboard() {
                     <div className="new-meet meeting-info">
                         {/* camera & controls */}
                         {/* Show date & time along with day info <br/> */}
-                            <p>
+                        <p>
                             {curTime}
-                          </p> 
-                        You have no upcoming meeting today.
+                        </p>
+                        <CalendarTodayIcon /> You have no upcoming meeting today.
                     </div>
                 </div>
             </div>
@@ -181,39 +221,58 @@ function Dashboard() {
 
                         <div className="modal-content">
                             <div className="">
-                                <audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoPlay={false} ></audio>
+                                <audio id="audio" autoPlay={true} ></audio>
                                 <div className="">
                                     <div title="logged user" className="video-wrapper">
-                                        <video id="vid" className="" autoPlay={true}></video>
+                                        <video id="vid" autoPlay={true}></video>
                                     </div>
                                     <div className="controls">
-                                    <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>Record</button>
-                                    <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>Participants</button>
-                                    <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>Chat</button>
-                                    <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>Toggle Mic</button>
-                                    <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>Toggle Camera</button>
-                                    <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>Toggle Mute others</button>
-                                        {isJoined && <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>End meeting</button>}
+                                        {/* <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>Record</button> */}
+                                        <button title="Participants" className=" join-now btn-icon" onClick={handleShowParticipants}>
+                                            <GroupIcon />
+                                        </button>
+                                        {/* <button className=" join-now btn-icon" onClick={e => handleJoin(false)}>Chat</button> */}
+
+
+                                        {/* {!micStatus && <button title="Turn On Mic" className=" join-now btn-icon" onClick={handleMicStatus}>
+                                            <MicIcon />
+                                        </button>}
+                                        {micStatus && <button title="Turn Off Mic" className=" join-now btn-icon" onClick={handleMicStatus}>
+                                            <MicOffIcon />
+                                        </button>} */}
+
+                                        {!cameraStatus && <button title="Turn On Video" className=" join-now btn-icon" onClick={handleCameraStatus}>
+                                            <VideocamIcon />
+                                        </button>}
+                                        {cameraStatus && <button title="Turn Off Video" className=" join-now btn-icon" onClick={handleCameraStatus}>
+                                            <VideocamOffIcon />
+                                        </button>}
+
+
+                                        {/* <button className=" join-now btn-icon" >Toggle Mute others</button> */}
+                                        {isJoined && <button title="End Meeting" className=" join-now btn-icon call-end" onClick={e => handleJoin(false)}>
+                                            <CallEndIcon />
+                                        </button>}
 
                                     </div>
-                                    {/* <div className="other-users">
-                                        {isJoined_f && <div title="test user 1" className="other-user">
+                                    {showParticipants && <div className="other-users">
+                                        <span onClick={handleShowParticipants} className="close-participants">&times;</span>
+                                        <div title="test user 1" className="other-user" style={{ marginTop: "30px" }}>
                                             <img src="https://image.flaticon.com/icons/svg/924/924874.svg" alt="user" />
-                                        </div>}
+                                            <span>John Deo</span>
+                                        </div>
 
-                                        {isJoined_s && <div title="test user 2" className="other-user">
+                                        <div title="test user 2" className="other-user">
                                             <img src="https://image.flaticon.com/icons/svg/2922/2922561.svg" alt="user" />
-                                        </div>}
+                                            <span>Emy</span>
+                                        </div>
 
-                                        {isJoined_t && <div title="test user 3" className="other-user">
+                                        <div title="test user 3" className="other-user">
                                             <img src="https://image.flaticon.com/icons/svg/3048/3048122.svg" alt="user" />
-                                        </div>}
+                                            <span>Mike</span>
+                                        </div>
                                     </div>
-                                    <div className="controls">
-                                        {!isJoined && <button className="my-btn" onClick={e => handleJoin(true)}>Start Meeting</button>}
-                                        {isJoined && <button className=" join-now btn my-btn" onClick={e => handleJoin(false)}>End meeting</button>}
-
-                                    </div> */}
+                                    }
                                 </div>
 
                                 {/* <div>
