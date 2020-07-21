@@ -175,6 +175,8 @@
     border: 1px solid;
     border-radius: 5px;
     box-shadow: 0px 2px 5px #000;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .close-participants {
@@ -297,5 +299,21 @@
             background: no-repeat;
             border: 1px solid #eee;
         }
+    }
+}
+
+.joined-user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-style: italic;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    // @extend .custom-scroller;
+
+    p {
+        margin: 0;
+        @extend .ellipsis;
+        width: 90px;
     }
 }

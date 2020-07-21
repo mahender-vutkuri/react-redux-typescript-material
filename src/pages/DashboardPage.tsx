@@ -20,6 +20,7 @@ function Dashboard() {
     const [curTime, setCurTime] = useState(new Date().toString());
 
     const [chatMessages, setChatMessages] = useState([])
+    const [users, setUsers] = useState<any[]>([]);
 
     useEffect(() => {
         let usr: any = localStorage.getItem('loggedinUser')
@@ -28,6 +29,10 @@ function Dashboard() {
 
         usr = usr.fname.substring(0, 1) + ' ' + usr.lname.substring(0, 1)
         setLoggedinUser(usr)
+
+        let localUsers: any = localStorage.getItem('users')
+        localUsers = JSON.parse(localUsers)
+        setUsers(localUsers)
     }, [])
     // ****************************************************************************
     const [isJoined_f, setJoined_f] = useState(false);
@@ -255,14 +260,23 @@ function Dashboard() {
                                         </button>}
 
                                     </div>
-                                    {showParticipants && <div className="other-users">
+                                    {showParticipants && <div className="other-users custom-scroller">
                                         <span onClick={handleShowParticipants} className="close-participants">&times;</span>
-                                        <div title="test user 1" className="other-user" style={{ marginTop: "30px" }}>
-                                            <img src="https://image.flaticon.com/icons/svg/924/924874.svg" alt="user" />
-                                            <span>John Deo</span>
-                                        </div>
 
-                                        <div title="test user 2" className="other-user">
+                                        {users.map((user: any, index) => (
+                                            <div  className="other-user" style={{ marginTop: "30px" }}>
+                                                {/* <img src='https://picsum.photos/200/300?random=`${index}`' alt="user" /> */}
+                                                <img src={`https://picsum.photos/200/300?random=${index}`} alt="user" />
+                                                <div className="joined-user-info">
+                                                    <p title={user.fname}>  {user.fname}  {user.lname} </p>
+                                                    <p title={user.email}> {user.email} </p>
+                                                </div>
+
+                                            </div>
+                                        ))}
+
+
+                                        {/* <div title="test user 2" className="other-user">
                                             <img src="https://image.flaticon.com/icons/svg/2922/2922561.svg" alt="user" />
                                             <span>Emy</span>
                                         </div>
@@ -270,7 +284,7 @@ function Dashboard() {
                                         <div title="test user 3" className="other-user">
                                             <img src="https://image.flaticon.com/icons/svg/3048/3048122.svg" alt="user" />
                                             <span>Mike</span>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     }
                                     {showChat && <div className="chat-window">
