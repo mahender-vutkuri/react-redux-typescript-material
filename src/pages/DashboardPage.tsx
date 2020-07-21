@@ -7,14 +7,20 @@ import VideocamOffIcon from '@material-ui/icons/VideocamOff';
 import GroupIcon from '@material-ui/icons/Group';
 import CallEndIcon from '@material-ui/icons/CallEnd';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+import SendIcon from '@material-ui/icons/Send';
 function Dashboard() {
 
     const [isJoined, setJoined] = useState(false);
+    const [showChat, setShowChat] = useState(false);
     const [cameraStatus, setCameraStatus] = useState(false);
     const [micStatus, setMicStatus] = useState(false);
     const [showParticipants, setShowParticipants] = useState(false);
     const [loggedinUser, setLoggedinUser] = useState('')
     const [curTime, setCurTime] = useState(new Date().toString());
+
+    const [chatMessages, setChatMessages] = useState([])
+
     useEffect(() => {
         let usr: any = localStorage.getItem('loggedinUser')
         usr = JSON.parse(usr)
@@ -29,30 +35,7 @@ function Dashboard() {
     const [isJoined_t, setJoined_t] = useState(false);
     const [meetingTime, setMeetingTime] = useState()
     const [meetingEndTime, setMeetingEndTime] = useState();
-
-    // const cameraAccess = () => {
-    //     let localstream;
-    //     let vid: any = document.getElementById('vid')
-    //     console.log(vid);
-
-    //     if (navigator.mediaDevices.getUserMedia !== null) {
-    //         var options = {
-    //             video: true,
-    //             audio: true
-    //         };
-    //         navigator.getUserMedia(options, function (stream) {
-    //             vid.srcObject = stream;
-    //             localstream = stream;
-    //             vid.play();
-    //             localStorage.setItem('meeting', "true")
-    //             console.log(stream, "streaming");
-    //         }, function (e) {
-    //             console.log("background error : " + e.name);
-    //         });
-    //     }
-
-
-    // }
+    const [newChatMsg, setNewChatMsg] = useState('');
 
     const capOff = () => {
         let localstream;
@@ -138,7 +121,7 @@ function Dashboard() {
     const handleCameraStatus = () => {
         let localstream;
         let vid: any = document.getElementById('vid')
-        console.log(cameraStatus)
+        // console.log(cameraStatus)
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(stream => {
                 vid.srcObject = stream
@@ -151,15 +134,30 @@ function Dashboard() {
         let localstream;
         let audio: any = document.getElementById('audio')
         // localStorage.removeItem('meeting')
-        console.log(cameraStatus)
+        // console.log(cameraStatus)
         navigator.mediaDevices.getUserMedia({ audio: true })
             .then(stream => {
                 audio.srcObject = stream
                 audio.srcObject.getTracks()[0].enabled = !micStatus;
             })
             .catch(e => console.log(e));
-        // if (micStatus) {}
         setMicStatus(!micStatus)
+    }
+    const handleChatWindow = () => {
+        setShowChat(!showChat)
+    }
+    const updateChatMessages = () => {
+        // newChatMsg
+        let msgs = [...chatMessages]
+        if (newChatMsg.trim().length > 0) {
+            msgs.push({
+                text: newChatMsg,
+                time: new Date().toString().substring(0, 21)
+            })
+            setChatMessages(msgs)
+            setNewChatMsg('')
+        }
+
     }
     return (
         <div className="auto-height">
@@ -231,15 +229,17 @@ function Dashboard() {
                                         <button title="Participants" className=" join-now btn-icon" onClick={handleShowParticipants}>
                                             <GroupIcon />
                                         </button>
-                                        {/* <button className=" join-now btn-icon" onClick={e => handleJoin(false)}>Chat</button> */}
+                                        <button title="Chat" onClick={handleChatWindow} className=" join-now btn-icon" >
+                                            <ChatBubbleIcon />
+                                        </button>
 
 
-                                        {/* {!micStatus && <button title="Turn On Mic" className=" join-now btn-icon" onClick={handleMicStatus}>
+                                        {!micStatus && <button title="Turn On Mic" className=" join-now btn-icon" onClick={handleMicStatus}>
                                             <MicIcon />
                                         </button>}
                                         {micStatus && <button title="Turn Off Mic" className=" join-now btn-icon" onClick={handleMicStatus}>
                                             <MicOffIcon />
-                                        </button>} */}
+                                        </button>}
 
                                         {!cameraStatus && <button title="Turn On Video" className=" join-now btn-icon" onClick={handleCameraStatus}>
                                             <VideocamIcon />
@@ -271,6 +271,27 @@ function Dashboard() {
                                             <img src="https://image.flaticon.com/icons/svg/3048/3048122.svg" alt="user" />
                                             <span>Mike</span>
                                         </div>
+                                    </div>
+                                    }
+                                    {showChat && <div className="chat-window">
+                                        <span onClick={handleChatWindow} className="close-participants cls-chat">&times;</span>
+                                        <div className="chat">
+                                            <ul className="messages">
+                                                {chatMessages.map((message: any, index) => (
+                                                    <li title={message.time} key={index}>
+                                                        {message.text}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                            <div className="new-message">
+                                                <input type="text" placeholder="type something" value={newChatMsg} onChange={e => {
+                                                    setNewChatMsg(e.target.value)
+                                                }} /> <button className="send-msg" onClick={updateChatMessages}>
+                                                    <SendIcon />
+                                                </button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                     }
                                 </div>
