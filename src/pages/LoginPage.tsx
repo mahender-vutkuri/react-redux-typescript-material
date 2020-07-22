@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
 }));
-
+ 
 export function LoginPage() {
     const history = useHistory();
     const classes = useStyles();

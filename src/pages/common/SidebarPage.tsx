@@ -94,7 +94,7 @@ export default function SideBar() {
   useEffect(() => {
     let usr: any = localStorage.getItem('loggedinUser')
     usr = JSON.parse(usr)
-    console.log(usr);
+    // console.log(usr);
     if(usr){
       usr = usr.fname.substring(0, 1) + ' ' + usr.lname.substring(0, 1)
       setLoggedinUser(usr)

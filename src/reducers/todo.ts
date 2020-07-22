@@ -21,4 +21,11 @@ export const todoList = createReducer<Todo[]>([], {
 		// remove all todos with the given id
 		return state.filter(t => t.id !== action.payload);
 	},
+	[TodoActions.EDIT_TODO](state: Todo[], action: any) {
+		console.log(action);
+		
+		return state.map(t =>
+			t.id === action.payload.id ? { ...t, text: action.payload.text,created: action.payload.created,completed:action.payload.completed} : t
+		);
+	},
 });

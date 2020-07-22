@@ -1,6 +1,7 @@
 // prettier-ignore
 import { Checkbox, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from "@material-ui/styles";
 import * as React from "react";
 import { useSelector } from "react-redux";
@@ -8,9 +9,12 @@ import { useActions } from "../actions";
 import * as TodoActions from "../actions/todo";
 import { Todo } from "../model";
 import { RootState } from "../reducers";
-
+import { useHistory,useLocation } from "react-router-dom";
 export function TodoTable() {
 	const classes = useStyles();
+	const history = useHistory();
+	
+	 
 	const todoList = useSelector((state: RootState) => state.todoList);
 	const todoActions = useActions(TodoActions);
 
@@ -31,21 +35,23 @@ export function TodoTable() {
 						<TableCell padding="default">Text</TableCell>
 						<TableCell padding="default">Created Date</TableCell>
 						<TableCell padding="default">Delete</TableCell>
+						<TableCell padding="default">Edit</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{todoList.map((n: Todo) => {
+						let dt = new Date(n.created).toLocaleDateString()+' '+new Date(n.created).toLocaleTimeString();
 						return (
 							<TableRow
 								key={n.id}
 								hover
-								onClick={event => onRowClick(n)}
+								// onClick={event => onRowClick(n)}
 							>
 								<TableCell padding="none">
-									<Checkbox checked={n.completed} />
+									<Checkbox onChange={event => onRowClick(n)} checked={n.completed} />
 								</TableCell>
 								<TableCell padding="none">{n.text}</TableCell>
-								<TableCell padding="none">{n.created.toString()}</TableCell>
+								<TableCell padding="none">{dt.toString()}</TableCell>
 								<TableCell padding="none">
 									<IconButton
 										aria-label="Delete"
@@ -55,6 +61,17 @@ export function TodoTable() {
 										}
 									>
 										<DeleteIcon />
+									</IconButton>
+								</TableCell>
+								<TableCell padding="none">
+									<IconButton
+										aria-label="Delete"
+										color="default"
+										onClick={() =>
+											history.push("/editTodo",{id:n.id})
+										}
+									>
+										<EditIcon />
 									</IconButton>
 								</TableCell>
 							</TableRow>

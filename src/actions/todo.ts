@@ -29,3 +29,10 @@ export function deleteTodo(todoId: number): TodoAction {
 		payload: todoId,
 	};
 }
+
+export function updateTodo(id:any,todo: Todo): TodoAction {
+	return {
+		type: TodoActions.EDIT_TODO,
+		payload: todo,
+	};
+}

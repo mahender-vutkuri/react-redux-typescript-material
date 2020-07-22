@@ -11,13 +11,14 @@ import { useSelector } from "react-redux";
 import { Route, Router } from "react-router-dom";
 import { history } from "./configureStore";
 import { Todo } from "./model";
-import { HomePage, TodoPage,Dashboard,LoginPage,GitReposPage,SignUp } from "./pages";
+import { HomePage, TodoPage,Dashboard,LoginPage,GitReposPage,SignUp,EditToDo } from "./pages";
 import { RootState } from "./reducers/index";
 import { withRoot } from "./withRoot";
 import Header from './pages/common/HeaderPage';
 import Album from './pages/album/AlbumPage';
 import Checkout from './pages/checkout/CheckoutPage';
 import { Redirect } from 'react-router';
+
 function Routes() {
 	const classes = useStyles();
 
@@ -32,6 +33,7 @@ function Routes() {
 			<Route exact={true} path="/login" component={LoginPage} />
 			<Route exact={true} path="/git" component={GitReposPage} />
 			<Route exact={true} path="/signup" component={SignUp} />
+			<Route path="/editTodo" component={EditToDo} />
 			{/* <Redirect from="*" to={"/login"} /> */}
 		</div>
 	);
