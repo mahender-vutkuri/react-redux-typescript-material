@@ -18,6 +18,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Link from '@material-ui/core/Link';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PeopleIcon from '@material-ui/icons/People';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import VideoCallIcon from '@material-ui/icons/VideoCall';
+import HomeIcon from '@material-ui/icons/Home';
+import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -182,26 +188,34 @@ export default function SideBar() {
         </div>
         <Divider />
         <List>
-          {['signup', 'users', 'git', 'drafts'].map((text, index) => (
-            <ListItem button key={text}>
+          {[{name:'home',icon:<HomeIcon/>},{name:'users',icon:<PeopleIcon/>},{name:'git',icon:<GitHubIcon/>},{name:'dashboard',icon:<VideoCallIcon/>},{name:'tasks',icon:<FormatListNumberedIcon/>}].map((item, index) => (
+            <ListItem button key={index}>
               <ListItemIcon>
-                <Link color="inherit" href={text}>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <Link title={item.name} color="inherit" href={item.name}>
+                  {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
+                  {item.icon}
                 </Link>
 
               </ListItemIcon>
-              <Link color="inherit" href={text}>
-                <ListItemText primary={text} />
+              <Link title={item.name} color="inherit" href={item.name}>
+                <ListItemText primary={item.name} />
               </Link>
             </ListItem>
           ))}
         </List>
-        <Divider />
+        <Divider /> 
         <List>
-          {['Inbox', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
+          {[{name:'signup',icon:<PersonAddIcon/>}].map((item, index) => (
+            <ListItem button key={index}>
+             <ListItemIcon>
+                <Link title={item.name} color="inherit" href={item.name}>
+                  {item.icon}
+                </Link>
+
+              </ListItemIcon>
+              <Link title={item.name} color="inherit" href={item.name}>
+                <ListItemText primary={item.name} />
+              </Link>
             </ListItem>
           ))}
         </List>

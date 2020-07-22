@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
@@ -62,8 +62,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Album() {
     const classes = useStyles();
-    const [users,setUsers] = useState<any[]>([]);
-   
+    const [users, setUsers] = useState<any[]>([]);
+
 
     useEffect(() => {
         let localUsers: any = localStorage.getItem('users')
@@ -72,11 +72,11 @@ export default function Album() {
     }, []);
 
     const deleteUser = (u, i) => {
-        console.log(u);
-        console.log(i);
+        // console.log(u);
+        // console.log(i);
         if (window.confirm("Are you sure, you want to delete the user?")) {
             let tempUsers = [...users]
-            tempUsers.splice(i,1)
+            tempUsers.splice(i, 1)
             setUsers(tempUsers)
             localStorage.setItem("users", JSON.stringify(tempUsers))
             alert('User deleted succesfully.')
@@ -93,23 +93,23 @@ export default function Album() {
                     </Container>
                 </div> */}
                 <Container className={classes.cardGrid} maxWidth="md">
-                    <Grid container spacing={4}>
-                        {users.map((user:any,index) => (
+                    {users.length > 0 ? <Grid container spacing={4}>
+                        {users.map((user: any, index) => (
                             <Grid item key={user.id} xs={12} sm={6} md={4}>
                                 <Card className={classes.card}>
                                     <CardMedia
                                         className={classes.cardMedia}
-                                        image={'https://picsum.photos/200/300?random='+index}
+                                        image={'https://picsum.photos/200/300?random=' + index}
                                         title="Image title">
                                         <div className="user-avatar">
-                                        <span className="user-avatar-inner">
-                                        {user.fname.substring(0,1)}  {user.lname.substring(0,1)}
-                                        </span>
+                                            <span className="user-avatar-inner">
+                                                {user.fname.substring(0, 1)}  {user.lname.substring(0, 1)}
+                                            </span>
                                         </div>
                                     </CardMedia>
                                     <CardContent className={classes.cardContent}>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                           {user.fname}  {user.lname}
+                                            {user.fname}  {user.lname}
                                         </Typography>
                                         <Typography className="ellipsis" title={user.email}>
                                             {user.email}
@@ -118,15 +118,21 @@ export default function Album() {
                                     <CardActions>
                                         <Button size="small" color="primary">
                                             View User
-                                        </Button>
-                                        <Button onClick={e=>deleteUser(user,index)} size="small" color="primary">
+                                                </Button>
+                                        <Button onClick={e => deleteUser(user, index)} size="small" color="primary">
                                             Delete
-                                        </Button>
+                                                </Button>
                                     </CardActions>
                                 </Card>
                             </Grid>
                         ))}
-                    </Grid>
+                    </Grid> : <Container maxWidth="sm">
+                            <Typography style={{border: '1px solid #eee',padding: '15px',boxShadow: '1px 2px 5px'}} component="h6" variant="h6" align="center" color="textPrimary" gutterBottom>
+                                No registered users found
+                        </Typography>
+                            <a style={{display: 'flex',justifyContent: 'center'}} href="/signup">Create users here</a>
+                        </Container>
+                    }
                 </Container>
             </main>
         </React.Fragment>
