@@ -13,6 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import cuid from 'cuid';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -52,7 +57,7 @@ export function SignUp() {
   const [lname, setLname] = useState("")
   const [email, setEmail] = useState("")
   const [pwd, setPwd] = useState("")
-
+  const [showSnackBar, setShowSnackBar] = useState(false)
   const signUpUser = () => {
     if (fname.trim().length > 0 && lname.trim().length > 0 && email.trim().length > 0 && pwd.trim().length > 0) {
       let users: any = localStorage.getItem('users')
@@ -62,10 +67,11 @@ export function SignUp() {
       let registeredUser = {
         id, fname, lname, email, pwd
       }
-      console.log(registeredUser);
+      // console.log(registeredUser);
       users.push(registeredUser)
       localStorage.setItem("users", JSON.stringify(users))
-      alert('user created succesfully')
+      // alert('user created succesfully')
+      setShowSnackBar(true)
       setFname("")
       setLname("")
       setEmail("")
@@ -77,6 +83,23 @@ export function SignUp() {
   return (
     <Container component="main" maxWidth="xs" className="signup auto-height">
       <CssBaseline />
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={showSnackBar}
+        autoHideDuration={6000}
+        onClose={e => (setShowSnackBar(false))}
+        message="user created succesfully"
+        action={
+          <React.Fragment>
+            <IconButton size="small" aria-label="close" color="inherit" onClick={e => (setShowSnackBar(false))}>
+              <CloseIcon fontSize="small" />
+            </IconButton>
+          </React.Fragment>
+        }
+      />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

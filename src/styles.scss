@@ -394,3 +394,26 @@
         //   outline: 1px solid slategrey;
     }
 }
+
+.home {
+
+    .MuiTextField-root {
+        margin: 20px
+    }
+}
+
+.MuiPaper-root {
+    background-color: teal !important;
+    box-shadow: 2px 0 5px !important;
+    .MuiListItem-button:hover {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+    }
+    .MuiListItemIcon-root {
+        color: white;
+    }
+
+    .MuiListItemText-root {
+        color: white;
+        text-transform: capitalize;
+    }
+}

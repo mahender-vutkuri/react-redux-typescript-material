@@ -12,6 +12,12 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
+
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -58,11 +64,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
     const classes = useStyles();
     const [users, setUsers] = useState<any[]>([]);
+    const [showSnackBar, setShowSnackBar] = useState(false)
 
 
     useEffect(() => {
@@ -72,26 +78,36 @@ export default function Album() {
     }, []);
 
     const deleteUser = (u, i) => {
-        // console.log(u);
-        // console.log(i);
         if (window.confirm("Are you sure, you want to delete the user?")) {
             let tempUsers = [...users]
             tempUsers.splice(i, 1)
             setUsers(tempUsers)
             localStorage.setItem("users", JSON.stringify(tempUsers))
-            alert('User deleted succesfully.')
+            setShowSnackBar(true);
         }
     }
     return (
         <React.Fragment>
             <main className="auto-height all-users">
-                {/* <div className={classes.heroContent}>
-                    <Container maxWidth="sm">
-                        <Typography component="h6" variant="h6" align="center" color="textPrimary" gutterBottom>
-                            This is the registered users list with some random profile images from <a href="https://source.unsplash.com/" target="_blank" >here</a>
-                        </Typography>
-                    </Container>
-                </div> */}
+
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={showSnackBar}
+                    autoHideDuration={6000}
+                    onClose={e => (setShowSnackBar(false))}
+                    message="User deleted succesfully."
+                    action={
+                        <React.Fragment>
+                            <IconButton size="small" aria-label="close" color="inherit" onClick={e => (setShowSnackBar(false))}>
+                                <CloseIcon fontSize="small" />
+                            </IconButton>
+                        </React.Fragment>
+                    }
+                />
+
                 <Container className={classes.cardGrid} maxWidth="md">
                     {users.length > 0 ? <Grid container spacing={4}>
                         {users.map((user: any, index) => (
@@ -127,10 +143,10 @@ export default function Album() {
                             </Grid>
                         ))}
                     </Grid> : <Container maxWidth="sm">
-                            <Typography style={{border: '1px solid #eee',padding: '15px',boxShadow: '1px 2px 5px'}} component="h6" variant="h6" align="center" color="textPrimary" gutterBottom>
+                            <Typography style={{ border: '1px solid #eee', padding: '15px', boxShadow: '1px 2px 5px' }} component="h6" variant="h6" align="center" color="textPrimary" gutterBottom>
                                 No registered users found
                         </Typography>
-                            <a style={{display: 'flex',justifyContent: 'center'}} href="/signup">Create users here</a>
+                            <a style={{ display: 'flex', justifyContent: 'center' }} href="/signup">Create users here</a>
                         </Container>
                     }
                 </Container>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import TextField from '@material-ui/core/TextField';
+
 function GitReposPage() {
     const [repos, setRepos] = useState<any[]>([])
     const [name, setName] = useState("facebook")
@@ -8,13 +10,14 @@ function GitReposPage() {
     }, []);
 
     const fetchRepoData = async () => {
-        const response = await axios.get('https://api.github.com/users/'+name+'/repos');
+        const response = await axios.get('https://api.github.com/users/' + name + '/repos');
         setRepos(response.data);
     }
     return (
         <div className="auto-height" style={{ marginLeft: "100px" }}>
-        <input type="text" value={name} onChange={e => setName(e.target.value)} />
-        <button onClick={fetchRepoData}>get repos</button> <small>(try angular, vue, jquery etc.)</small>
+            <TextField required id="standard-required" label="Required" value={name} onChange={e => setName(e.target.value)} />
+            {/* <input type="text" value={name} onChange={e => setName(e.target.value)} /> */}
+            <button style={{ color: 'white', background: 'teal' }} className="join-now btn" onClick={fetchRepoData}>Get Repos</button> <small>(try angular, vue, jquery etc.)</small>
             <h2>
                 This is the real time data of {name} projects in GIT
             </h2>

@@ -96,15 +96,12 @@ function Dashboard() {
 
             setTimeout(() => {
                 setJoined_f(true)
-                // alert('User 1 is joined')
             }, 2000);
             setTimeout(() => {
                 setJoined_s(true)
-                // alert('User 2 is joined')
             }, 5000);
             setTimeout(() => {
                 setJoined_t(true)
-                // alert('User 2 is joined')
             }, 10000);
         } else {
             capOff()

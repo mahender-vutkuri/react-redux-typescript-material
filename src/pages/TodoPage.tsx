@@ -10,6 +10,9 @@ export function TodoPage() {
 
 	const handleClose = () => {
 		setOpen(false);
+		setTimeout(()=>{
+			window.location.reload()
+		},1000)
 	};
 
 	const handleAddTodo = () => {

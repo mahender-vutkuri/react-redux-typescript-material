@@ -28,9 +28,9 @@ export function TodoTable() {
 		} else {
 			todoActions.completeTodo(todo.id);
 		}
-		setTimeout(()=>{
+		setTimeout(() => {
 			window.location.reload()
-		},1000)
+		}, 1000)
 	};
 	const filterColors = (inputValue: string) => {
 		return todoList.filter(i => {
@@ -112,8 +112,12 @@ export function TodoTable() {
 										<IconButton
 											aria-label="Delete"
 											color="default"
-											onClick={() =>
-												todoActions.deleteTodo(n.id)
+											onClick={() => {
+												todoActions.deleteTodo(n.id);
+												setTimeout(() => {
+													window.location.reload()
+												}, 1000)
+											}
 											}
 										>
 											<DeleteIcon />
