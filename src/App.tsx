@@ -18,7 +18,7 @@ import Header from './pages/common/HeaderPage';
 import Album from './pages/album/AlbumPage';
 import Checkout from './pages/checkout/CheckoutPage';
 import { Redirect } from 'react-router';
-
+import Account from './pages/account/AccountPage';
 function Routes() {
 	const classes = useStyles();
 
@@ -34,6 +34,7 @@ function Routes() {
 			<Route exact={true} path="/git" component={GitReposPage} />
 			<Route exact={true} path="/signup" component={SignUp} />
 			<Route path="/editTodo" component={EditToDo} />
+			<Route path="/account" component={Account} />
 			{/* <Redirect from="*" to={"/login"} /> */}
 		</div>
 	);

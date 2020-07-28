@@ -56,7 +56,7 @@ export function LoginPage() {
 
         let users: any = localStorage.getItem('users')
         users = JSON.parse(users)
-        // console.log(users)
+        console.log(users)
         if (users && users.length == 0 || users == null) {
             if (email == "admin" && pwd == "admin") {
                 history.push("/dashboard");
@@ -69,9 +69,9 @@ export function LoginPage() {
             const isUserFound = (element: any) => (element.email == email && element.pwd == pwd);
             let i = users.findIndex(isUserFound)
             // console.log(i);
-            localStorage.setItem("loggedinUser",JSON.stringify(users[i]))
             if (i !== -1) {
                 history.push("/dashboard");
+                localStorage.setItem("loggedinUser",JSON.stringify(users[i]))
                 localStorage.setItem('isLoggedin', "true")
                 window.location.reload();
             } else {

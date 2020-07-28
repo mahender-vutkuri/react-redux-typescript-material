@@ -99,9 +99,9 @@ export default function SideBar() {
 
   useEffect(() => {
     let usr: any = localStorage.getItem('loggedinUser')
-    usr = JSON.parse(usr)
     // console.log(usr);
-    if(usr){
+    if (usr && usr !== undefined) {
+      usr = JSON.parse(usr)
       usr = usr.fname.substring(0, 1) + ' ' + usr.lname.substring(0, 1)
       setLoggedinUser(usr)
     }
@@ -159,7 +159,7 @@ export default function SideBar() {
             </ul>
             <div title="user name" onClick={myFunction} className="user-tile" > {loggedinUser} </div>
             {showDropdown && <div className="dropdown-content" id="myDropdown">
-              <a href="#">Settings</a>
+              <a href="/account">Settings</a>
               <a href="/login" onClick={e => {
                 localStorage.setItem('isLoggedin', "false")
                 localStorage.removeItem('loggedinUser')
@@ -188,7 +188,7 @@ export default function SideBar() {
         </div>
         <Divider />
         <List>
-          {[{name:'home',icon:<HomeIcon/>},{name:'users',icon:<PeopleIcon/>},{name:'git',icon:<GitHubIcon/>},{name:'dashboard',icon:<VideoCallIcon/>},{name:'tasks',icon:<FormatListNumberedIcon/>}].map((item, index) => (
+          {[{ name: 'home', icon: <HomeIcon /> }, { name: 'users', icon: <PeopleIcon /> }, { name: 'git', icon: <GitHubIcon /> }, { name: 'dashboard', icon: <VideoCallIcon /> }, { name: 'tasks', icon: <FormatListNumberedIcon /> }].map((item, index) => (
             <ListItem button key={index}>
               <ListItemIcon>
                 <Link title={item.name} color="inherit" href={item.name}>
@@ -203,11 +203,11 @@ export default function SideBar() {
             </ListItem>
           ))}
         </List>
-        <Divider /> 
+        <Divider />
         <List>
-          {[{name:'signup',icon:<PersonAddIcon/>}].map((item, index) => (
+          {[{ name: 'signup', icon: <PersonAddIcon /> }].map((item, index) => (
             <ListItem button key={index}>
-             <ListItemIcon>
+              <ListItemIcon>
                 <Link title={item.name} color="inherit" href={item.name}>
                   {item.icon}
                 </Link>
