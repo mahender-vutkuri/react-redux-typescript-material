@@ -19,18 +19,20 @@ const history = createBrowserHistory();
 
 const dev = process.env.NODE_ENV === "development";
 
-let middleware = dev ? applyMiddleware(thunk, logger) : applyMiddleware(thunk);
+// let middleware = dev ? applyMiddleware(thunk, logger) : applyMiddleware(thunk);
+let middleware = dev ? applyMiddleware(thunk) : applyMiddleware(thunk);
 
 if (dev) {
 	middleware = composeWithDevTools(middleware);
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer(history));
-
+var allusers = JSON.parse(localStorage.getItem('users'))
 export default () => {
 	const store = createStore(persistedReducer, {}, middleware) as any;
 	const persistor = persistStore(store);
-	return { store, persistor };
+	const regUsers = allusers;
+	return { store, persistor, regUsers };
 };
 
 export { history };

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
 
+import { useActions } from "../actions";
+import * as UserActions from "../actions/user";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,53 +47,26 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
 }));
- 
+
 export function LoginPage() {
+    const userActions = useActions(UserActions);
+
     const history = useHistory();
     const classes = useStyles();
     const [email, setEmail] = useState('')
     const [pwd, setPwd] = useState('')
-    
+
     const handleLogin = () => {
 
-        let users: any = localStorage.getItem('users')
-        users = JSON.parse(users)
-        console.log(users)
-        if (users && users.length == 0 || users == null) {
-            if (email == "admin" && pwd == "admin") {
-                history.push("/dashboard");
-                localStorage.setItem('isLoggedin',"true")
-                localStorage.setItem("loggedinUser",'{"id":"ckcnd4c9o00013b5r1j1lf2aj","fname":"admin","lname":"admin","email":"admin","pwd":"admin"}')
-                window.location.reload();
-            } 
-            alert('no registered users found. try logging with username: "admin", password: "admin"')
-        } else {
-            const isUserFound = (element: any) => (element.email == email && element.pwd == pwd);
-            let i = users.findIndex(isUserFound)
-            // console.log(i);
-            if (i !== -1) {
-                history.push("/dashboard");
-                localStorage.setItem("loggedinUser",JSON.stringify(users[i]))
-                localStorage.setItem('isLoggedin', "true")
-                window.location.reload();
-            } else {
-                alert('invalid credentials')
-            }
+        let obj = {
+            email: email,
+            pwd: pwd
         }
-
-
-
-        // if (email == "admin" && pwd == "admin") {
-        //     history.push("/dashboard");
-        //     localStorage.setItem('isLoggedin',"true")
-        //     window.location.reload();
-        // } else {
-        //     alert('invalid credentials')
-        // }
+       userActions.loginUser(obj)
     }
-    useEffect(()=>{
-        let el:any = document.getElementsByClassName('header')[0]
-        el.style.display='none'
+    useEffect(() => {
+        let el: any = document.getElementsByClassName('header')[0]
+        el.style.display = 'none'
     })
     return (
         <Grid container component="main" className={classes.root + " login "}>
